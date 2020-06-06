@@ -1,32 +1,14 @@
 function HUDBlackScreen:_set_job_data_crime_spree()
-    --default shit, only change after highest
-	local job_panel = self._blackscreen_panel:panel({
-		y = 0,
-		name = "job_panel",
-		halign = "grow",
-		visible = true,
-		layer = 1,
-		valign = "grow"
-	})
-	local job_text = job_panel:text({
-		vertical = "bottom",
-		align = "center",
-		text = managers.localization:to_upper_text(crime_spree_text),
-		font = tweak_data.menu.pd2_large_font,
-		font_size = tweak_data.menu.pd2_large_font_size,
-		color = tweak_data.screen_colors.crime_spree_risk
-    })
-    
-
     --thankfully no check required here for cs being active
     local level = managers.crime_spree:server_spree_level()
     local crime_spree_text = "cn_crime_spree"
+
     --HAHAHAHA
     if level >= 1400 then
         crime_spree_text = "cn_crime_spree_4"
         --HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA
         if level >= 1500 then
-            job_panel = self._blackscreen_panel:panel({
+            local job_panel = self._blackscreen_panel:panel({
                 y = 0,
                 name = "job_panel",
                 halign = "scale",
@@ -34,7 +16,7 @@ function HUDBlackScreen:_set_job_data_crime_spree()
                 layer = 3,
                 valign = "scale"
             })
-            job_text = job_panel:text({
+            local job_text = job_panel:text({
                 vertical = "top",
                 align = "center",
                 text = managers.localization:to_upper_text(crime_spree_text),
@@ -58,6 +40,23 @@ function HUDBlackScreen:_set_job_data_crime_spree()
     end
 
     --unchanged from here on out
+    --default shit, only change if highest
+	local job_panel = self._blackscreen_panel:panel({
+		y = 0,
+		name = "job_panel",
+		halign = "grow",
+		visible = true,
+		layer = 1,
+		valign = "grow"
+	})
+	local job_text = job_panel:text({
+		vertical = "bottom",
+		align = "center",
+		text = managers.localization:to_upper_text(crime_spree_text),
+		font = tweak_data.menu.pd2_large_font,
+		font_size = tweak_data.menu.pd2_large_font_size,
+		color = tweak_data.screen_colors.crime_spree_risk
+    })
 	job_text:set_bottom(job_panel:h() * 0.5)
 	job_text:set_center_x(job_panel:center_x())
 
